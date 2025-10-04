@@ -4,14 +4,37 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Wael Yasmina</title>
+    <title>Three.js Room Viewer</title>
     <style>
         body {
             margin: 0;
+            overflow: hidden; /* prevent scrollbars */
+        }
+        #ui-panel {
+            position: absolute;
+            top: 10px;
+            left: 10px;
+            background: rgba(0,0,0,0.5);
+            color: white;
+            padding: 10px;
+            border-radius: 8px;
+            font-family: sans-serif;
+            z-index: 10;
         }
     </style>
 </head>
 <body>
+    <!-- UI Panel -->
+    <div id="ui-panel">
+        <button id="reset-camera">Reset Camera</button>
+        <div style="margin-top: 5px;">
+            <strong>Camera:</strong>
+            <div id="camera-pos">x:0 y:0 z:0</div>
+            <div id="camera-rot">rotY:0</div>
+        </div>
+    </div>
+
+    <!-- Main JS file -->
     <script src="/main.js" type="module"></script>
 </body>
 </html>
