@@ -1,5 +1,7 @@
 import * as THREE from 'three';
 import {OrbitControls} from 'three/examples/jsm/controls/OrbitControls.js';
+// import {GLTFLoader} from 'three/examples/jsm/loaders/GLTFLoader.js';
+import { OBJLoader } from 'three/examples/jsm/loaders/OBJLoader.js';
 
 const renderer = new THREE.WebGLRenderer({antialias: true});
 renderer.setSize(window.innerWidth, window.innerHeight);
@@ -24,13 +26,34 @@ camera.position.set(6, 8, 14);
 // Has to be done everytime we update the camera position.
 orbit.update();
 
-// Creates a 12 by 12 grid helper.
-const gridHelper = new THREE.GridHelper(12, 12);
-scene.add(gridHelper);
+const loader = new OBJLoader();
+loader.load(
+    './RoomObj.obj',
+    function (obj) {
+        scene.add(obj);
+    },
+    function (xhr) {
+        console.log((xhr.loaded / xhr.total * 100) + '% loaded');
+    },
+    function (error) {
+        console.error('An error happened', error);
+    }
+);
 
-// Creates an axes helper with an axis length of 4.
-const axesHelper = new THREE.AxesHelper(4);
-scene.add(axesHelper);
+
+// const loader = new GLTFLoader();
+// loader.load('./public/Room.glb', function(glb){
+//     const model = glb.scene;
+//     scene.add(model);
+// });
+
+// // Creates a 12 by 12 grid helper.
+// const gridHelper = new THREE.GridHelper(12, 12);
+// scene.add(gridHelper);
+
+// // Creates an axes helper with an axis length of 4.
+// const axesHelper = new THREE.AxesHelper(4);
+// scene.add(axesHelper);
 
 function animate() {
     renderer.render(scene, camera);
